@@ -22,7 +22,7 @@
 #ifndef __UBERTOOTH_CONTROL_H__
 #define __UBERTOOTH_CONTROL_H__
 
-#include <libusb/libusb.h>
+#include "../libusb/libusb/libusb.h"
 
 #if defined __MACH__
 #include <CoreServices/CoreServices.h>

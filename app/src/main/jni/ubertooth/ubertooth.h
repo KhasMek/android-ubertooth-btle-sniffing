@@ -23,9 +23,9 @@
 #define __UBERTOOTH_H__
 
 #include "ubertooth_control.h"
-#include <btbb.h>
-#include <bluetooth_packet.h>
-#include <bluetooth_piconet.h>
+#include "../libbtbb/btbb.h"
+#include "../libbtbb/bluetooth_packet.h"
+#include "../libbtbb/bluetooth_piconet.h"
 
 /* Mark unused variables to avoid gcc/clang warnings */
 #define UNUSED(x) (void)(x)

@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <usb.h>
+#include "../libusb/usb.h"
 
 int verbose = 0;
 

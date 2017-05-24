@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include <libusb/libusb.h>
+#include "../libusb/libusb.h"
 
 void print_devs(libusb_device **devs)
 {

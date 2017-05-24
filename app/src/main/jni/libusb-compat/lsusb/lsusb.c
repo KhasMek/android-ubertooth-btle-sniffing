@@ -18,7 +18,7 @@
  */
 
 #include <stdio.h>
-#include <usb.h>
+#include "../libusb/usb.h"
 
 int main(void)
 {

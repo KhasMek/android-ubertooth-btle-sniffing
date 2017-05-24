@@ -290,6 +290,28 @@ static uint64_t now_ns_from_clk100ns(const usb_pkt_rx *rx) {
 /* Sniff for LAPs. If a piconet is provided, use the given LAP to
  * search for UAP.
  */
+void Java_com_gnychis_ubertooth_DeviceHandlers_UbertoothOne_LAPResult(
+		JNIEnv* env, jobject obj, char *stringtowrite) {
+	jclass cls;
+	jstring LAPResultString;
+	JNIEnv* env2;
+	jint rv;
+	int status;
+
+//    __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "enter LAPResult() %d, running = %d", (int)env, (int)rx_LAP_running);
+	LAPResultString = (*env)->NewStringUTF(env, stringtowrite);	// creates a jstring
+	char buf[128];
+	const char *str = (*env)->GetStringUTFChars(env, LAPResultString, 0);
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "LAPResult() write %s", str);
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Calling JAVA method from NATIVE C/C++ %d, %d, %d", (int)*env, (int)gJavaObject, (int)gJMethodID);
+	(*env)->CallVoidMethod(env, gJavaObject, gJMethodID, LAPResultString);
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "DONE!!!");
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "LAPResult(): CallVoidMethod done");
+	(*env)->ReleaseStringUTFChars(env, LAPResultString, str);
+	(*env)->DeleteLocalRef(env, LAPResultString);
+	return;
+}
+
 //static void cb_lap(JNIEnv* env, jobject thiz, void* args, usb_pkt_rx *rx, int bank){
 static void cb_lap(JNIEnv* env, jobject thiz, void* args, usb_pkt_rx *rx,
 		int bank) {
@@ -418,6 +440,28 @@ static void cb_lap(JNIEnv* env, jobject thiz, void* args, usb_pkt_rx *rx,
 //out:
 //	if (pkt)
 //		btbb_packet_unref(pkt)
+
+void Java_com_gnychis_ubertooth_DeviceHandlers_UbertoothOne_BTLEResult(
+		JNIEnv* env, jobject obj, char *stringtowrite) {
+	jclass cls;
+	jstring BTLEResultString;
+	JNIEnv* env2;
+	jint rv;
+	int status;
+
+//    __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "enter LAPResult() %d, running = %d", (int)env, (int)rx_LAP_running);
+	BTLEResultString = (*env)->NewStringUTF(env, stringtowrite);// creates a jstring
+	char buf[128];
+	const char *str = (*env)->GetStringUTFChars(env, BTLEResultString, 0);
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "BTLEResult() write %s", str);
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Calling JAVA method from NATIVE C/C++ %d, %d, %d", (int)*env, (int)gJavaObject, (int)gJMethodID);
+	(*env)->CallVoidMethod(env, gJavaObject, gJMethodID, BTLEResultString);
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "DONE!!!");
+//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "LAPResult(): CallVoidMethod done");
+	(*env)->ReleaseStringUTFChars(env, BTLEResultString, str);
+	(*env)->DeleteLocalRef(env, BTLEResultString);
+	return;
+}
 
 /*
  * Sniff Bluetooth Low Energy packets.
@@ -691,50 +735,6 @@ jint Java_com_gnychis_ubertooth_DeviceHandlers_UbertoothOne_StartRxLAP(
 	libusb_free_transfer(rx_xfer);
 	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "start_rxLAP() done");
 	return 0;
-}
-
-jint Java_com_gnychis_ubertooth_DeviceHandlers_UbertoothOne_BTLEResult(
-		JNIEnv* env, jobject obj, char *stringtowrite) {
-	jclass cls;
-	jstring BTLEResultString;
-	JNIEnv* env2;
-	jint rv;
-	int status;
-
-//    __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "enter LAPResult() %d, running = %d", (int)env, (int)rx_LAP_running);
-	BTLEResultString = (*env)->NewStringUTF(env, stringtowrite);// creates a jstring
-	char buf[128];
-	const char *str = (*env)->GetStringUTFChars(env, BTLEResultString, 0);
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "BTLEResult() write %s", str);
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Calling JAVA method from NATIVE C/C++ %d, %d, %d", (int)*env, (int)gJavaObject, (int)gJMethodID);
-	(*env)->CallVoidMethod(env, gJavaObject, gJMethodID, BTLEResultString);
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "DONE!!!");
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "LAPResult(): CallVoidMethod done");
-	(*env)->ReleaseStringUTFChars(env, BTLEResultString, str);
-	(*env)->DeleteLocalRef(env, BTLEResultString);
-	return;
-}
-
-jint Java_com_gnychis_ubertooth_DeviceHandlers_UbertoothOne_LAPResult(
-		JNIEnv* env, jobject obj, char *stringtowrite) {
-	jclass cls;
-	jstring LAPResultString;
-	JNIEnv* env2;
-	jint rv;
-	int status;
-
-//    __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "enter LAPResult() %d, running = %d", (int)env, (int)rx_LAP_running);
-	LAPResultString = (*env)->NewStringUTF(env, stringtowrite);	// creates a jstring
-	char buf[128];
-	const char *str = (*env)->GetStringUTFChars(env, LAPResultString, 0);
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "LAPResult() write %s", str);
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Calling JAVA method from NATIVE C/C++ %d, %d, %d", (int)*env, (int)gJavaObject, (int)gJMethodID);
-	(*env)->CallVoidMethod(env, gJavaObject, gJMethodID, LAPResultString);
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "DONE!!!");
-//	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "LAPResult(): CallVoidMethod done");
-	(*env)->ReleaseStringUTFChars(env, LAPResultString, str);
-	(*env)->DeleteLocalRef(env, LAPResultString);
-	return;
 }
 
 jint Java_com_gnychis_ubertooth_DeviceHandlers_UbertoothOne_StopRxLAP(

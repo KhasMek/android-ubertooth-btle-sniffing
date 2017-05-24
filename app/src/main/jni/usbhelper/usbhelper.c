@@ -16,8 +16,8 @@
  */
 #include <string.h>
 #include <jni.h>
-#include <usb.h>
-#include <libusb.h>
+#include "../libusb-compat/libusb/usb.h"
+#include "../libusb/libusb/libusb.h"
 #include <android/log.h>
 #include <errno.h>
 #define LOG_TAG "USBHelper" // text for log tag 

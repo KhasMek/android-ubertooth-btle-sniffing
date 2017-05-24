@@ -1,25 +1,35 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 25
     buildToolsVersion "25.0.3"
-
     defaultConfig {
+        externalNativeBuild {
+            ndkBuild {
+                arguments "NDK_DEBUG=0", "-j4", "all"
+            }
+        }
         applicationId "com.gnychis.ubertooth"
-        minSdkVersion 19
-        targetSdkVersion 19
+        minSdkVersion 25
+        targetSdkVersion 25
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:support-v4:25.3.1'
     compile files('libs/RootTools-1.7.jar')
     compile files('libs/achartengine-1.0.0.jar')
 }
